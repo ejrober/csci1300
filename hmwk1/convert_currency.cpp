@@ -24,9 +24,6 @@ int main(){
         silver_coins = silver_coins - (gold_coins * 23);
     }
 
-    //cout << to_string(gold_coins) + ", " + to_string(silver_coins) + ", " + to_string(bronze_coins) + ", " + to_string(iron_coins) << endl;
-
     cout << to_string(gold_coins) + " gold coin(s) " + to_string(silver_coins) + " silver coin(s) " + to_string(bronze_coins) + " bronze coin(s) " + to_string(iron_coins) + " iron coin(s)" << endl;
-
 
 }
