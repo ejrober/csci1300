@@ -3,7 +3,7 @@
 using namespace std;
 
 double calculateWallArea(double length, double width){
-    double area = length * width * 4;
+    double area = (length * 20) + (width * 20);
     return area;
 }
 
