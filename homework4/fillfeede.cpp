@@ -38,7 +38,7 @@ int main(){
 
     int num_days_until_feeder3_runs_out = manageFeeder(3, days_since_last_fill);
 
-    cout << "Feeder 1 will need to be "
+    cout << "Feeder 1 will need to be filled in " << num_days_until_feeder1_runs_out << " days, feeder 2 will need to be filled in " << num_days_until_feeder2_runs_out << " days, feeder 3 will need to be filled in " << num_days_until_feeder3_runs_out << " days." << endl;
 
 }
 
