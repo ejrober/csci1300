@@ -45,20 +45,39 @@ int main(){
 int manageFeeder(int feeder, int days_since_past_last_fill){ // calculate how many days until the specified feeder runs out of birdseed
     int capacity;
     int drain_rate;
+    int days_till_fill;
     if(feeder == 1){
         capacity = 21;
         drain_rate = 3 * days_since_past_last_fill;
-        return capacity - drain_rate;
+        days_till_fill = (capacity - drain_rate) / 3;
+        if(days_till_fill < 0){
+            return 0;
+        }
+        else{
+            return days_till_fill;
+        }
     }
     else if(feeder == 2){
         capacity = 37;
         drain_rate = 2 * days_since_past_last_fill;
-        return capacity - drain_rate;
+        days_till_fill = (capacity - drain_rate) / 2;
+        if(days_till_fill < 0){
+            return 0;
+        }
+        else{
+            return days_till_fill;
+        }
     }
     else if(feeder == 3){
         capacity = 17;
         drain_rate = 4 * days_since_past_last_fill;
-        return capacity - drain_rate;
+        days_till_fill = (capacity - drain_rate) / 4;
+        if(days_till_fill < 0){
+            return 0;
+        }
+        else{
+            return days_till_fill;
+        }
     }
     else{
         return -1;
