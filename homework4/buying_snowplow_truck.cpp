@@ -8,7 +8,6 @@ int purchaseTruck(int budget, int truck);
 int main(){
     int budget =  81350;
     int truck;
-
     cout << "These are the trucks available for purchase:" << endl;
 
     cout << "Truck model 1: Ford F-150. Price: $26,900" << endl;
@@ -21,12 +20,20 @@ int main(){
 
     cout << "Truck model 5: GMC Sierra 1500. Price: $28,300" << endl;
 
-    cout << "Please enter a number from 1 to 5:" << endl;
+    for(int i = 0; i < 3; i++){
+        if(i < 3 && budget > 31200){
+            cout << "Please enter a number from 1 to 5:" << endl;
 
-    cin >> truck;
+            cin >> truck;
 
-    
-    purchaseTruck(budget, truck);
+            budget = purchaseTruck(budget, truck);
+        }
+        else {
+            return 1;
+        }
+        
+    }
+        
 
     return 1;
 
