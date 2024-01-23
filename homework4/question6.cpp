@@ -34,21 +34,21 @@ int main(){
 }
 
 void calculateAndDisplayDiet(int current_day, double previous_days_fed){
-
-    if(previous_days_fed > 18){
-        cout << "Ralphie was fed too much yesterday!" << endl;
+    if((current_day == 2) || (current_day == 5) || (current_day == 6)){
+        if((16.5 + previous_days_fed) >= 35){
+            cout << "Ralphie was fed too much yesterday!" << endl;
+            return;
+        }
+        double max = 34.50 - previous_days_fed;
+        cout << "Ralphie should be fed at least 16.50 and at most " << setprecision(4) << max << " MCals of food today." << endl;
     }
     else{
-        if(current_day == 2 || current_day == 5 || current_day == 6){
-            double max = 34.50 - previous_days_fed;
-            cout << "Ralphie should be fed at least 16.50 and at most " << setprecision(4) << max << " MCals of food today." << endl;
+        if((12.5 + previous_days_fed) >= 35){
+            cout << "Ralphie was fed too much yesterday!" << endl;
+            return;
         }
-        else{
-            double max = 34.50 - previous_days_fed;
-            cout << "Ralphie should be fed at least 12.50 and at most " << setprecision(7) << max << " MCals of food today." << endl;
-        }
-        
+        double max = 34.50 - previous_days_fed;
+        cout << "Ralphie should be fed at least 12.50 and at most " << setprecision(7) << max << " MCals of food today." << endl;
     }
-
     
 }
