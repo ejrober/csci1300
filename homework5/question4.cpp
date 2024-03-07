@@ -147,22 +147,22 @@ vector<string> addProduct(char product_option, vector<string> shopping_cart){
 double removeProduct(double budget, string remove_product){
     if (remove_product == "Cheetos"){
         budget = budget + 2.99;
-        cout << "Cheetos removed from cart." << endl;
+        //cout << "Cheetos removed from cart." << endl;
         return budget;
     }
     else if (remove_product == "Oreos"){
         budget = budget + 2.99;
-        cout << "Oreos removed from cart." << endl;
+        //cout << "Oreos removed from cart." << endl;
         return budget;
     }
     else if (remove_product == "Coffee"){
         budget = budget + 2.99;
-        cout << "Coffee removed from cart." << endl;
+        //cout << "Coffee removed from cart." << endl;
         return budget;
     }
     else if (remove_product == "Slurpee"){
         budget = budget + 2.99;
-        cout << "Slurpee removed from cart." << endl;
+        //cout << "Slurpee removed from cart." << endl;
         return budget;
     }
     else{
