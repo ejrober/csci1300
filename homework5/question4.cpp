@@ -4,7 +4,7 @@ using namespace std;
 
 double addProduct(double budget, char product_option);
 
-vector<string> addProduct(char product_option, vector<string> shopping_cart);
+vector<string> addProduct(double budget, char product_option, vector<string> shopping_cart);
 
 double removeProduct(double budget, string remove_product);
 
@@ -45,7 +45,7 @@ int main()
             cin >> product_option;
 
             budget = addProduct(budget, product_option); 
-            shopping_cart = addProduct(product_option, shopping_cart);
+            shopping_cart = addProduct(budget, product_option, shopping_cart);
         }
         else if (menu_option == 2){
             string remove_product;
@@ -117,11 +117,18 @@ double addProduct(double budget, char product_option){
     }
 }
 
-vector<string> addProduct(char product_option, vector<string> shopping_cart){
+vector<string> addProduct(double budget, char product_option, vector<string> shopping_cart){
     if ((product_option == 'A') || (product_option == 'a')){
+        if(budget > 2.98){
         shopping_cart.push_back("Cheetos");
         cout << "Cheetos added to cart." << endl;
         return shopping_cart;
+        }
+        else{
+            cout << "Insufficient funds!" << budget << endl;
+            return shopping_cart;
+        }
+        
     }
     else if ((product_option == 'B') || (product_option == 'b')){
         shopping_cart.push_back("Oreos");
