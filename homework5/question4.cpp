@@ -2,9 +2,7 @@
 #include <vector>
 using namespace std;
 
-double addProduct(double budget, char product_option);
-
-vector<string> addProduct(double budget, char product_option, vector<string> shopping_cart);
+void addProduct(double& budget, char product_option, vector<string>& shopping_cart);
 
 double removeProduct(double budget, string remove_product);
 
@@ -44,8 +42,7 @@ int main()
 
             cin >> product_option;
 
-            budget = addProduct(budget, product_option); 
-            shopping_cart = addProduct(budget, product_option, shopping_cart);
+            addProduct(budget, product_option, shopping_cart);
         }
         else if (menu_option == 2){
             string remove_product;
@@ -61,93 +58,60 @@ int main()
     }
 }
 
-double addProduct(double budget, char product_option){
-    if ((product_option == 'A') || (product_option == 'a'))
-        {
+void addProduct(double& budget, char product_option, vector<string>& shopping_cart){
+    cout << "Budget = " << budget << endl;
+    if ((product_option == 'A') || (product_option == 'a')){
         if (budget >= 2.99){
             budget = budget - 2.99;
-            //shopping_cart.push_back("Cheetos");
-            //cout << "Cheetos added to cart." << endl;
-            return budget;
-        }
-        else{
-            cout << "Your budget is insufficient to add more products." << endl;
-            return budget;
-        }
-    }
-    else if ((product_option == 'B') || (product_option == 'b')){
-        if (budget >= 3.39){
-            budget = budget - 3.39;
-            //shopping_cart.push_back("Oreos");
-            //cout << "Oreos added to cart." << endl;
-            return budget;
-        }
-        else{
-            cout << "Your budget is insufficient to add more products." << endl;
-            return budget;
-        }
-    }
-    else if ((product_option == 'C') || (product_option == 'c')){
-        if (budget >= 3.79){
-            budget = budget - 3.79;
-            //shopping_cart.push_back("Coffee");
-            //cout << "Coffee added to cart." << endl;
-            return budget;
-        }
-        else{
-            cout << "Your budget is insufficient to add more products." << endl;
-            return budget;
-        }
-    }
-    else if ((product_option == 'D') || (product_option == 'd')){
-        if (budget >= 4.29){
-            budget = budget - 4.29;
-            //shopping_cart.push_back("Slurpee");
-            //cout << "Slurpee added to cart." << endl;
-            return budget;
-        }
-        else{
-            cout << "Your budget is insufficient to add more products." << endl;
-            return budget;
-        }
-    }
-    else{
-        cout << "Invalid input." << endl;
-        return budget;
-    }
-}
-
-vector<string> addProduct(double budget, char product_option, vector<string> shopping_cart){
-    if ((product_option == 'A') || (product_option == 'a')){
-        if(budget > 2.98){
-        shopping_cart.push_back("Cheetos");
-        cout << "Cheetos added to cart." << endl;
-        return shopping_cart;
+            shopping_cart.push_back("Cheetos");
+            cout << "Cheetos added to cart. " << endl;
+            return;
         }
         else{
             cout << "Insufficient funds!" << budget << endl;
-            return shopping_cart;
+            return;
         }
         
     }
     else if ((product_option == 'B') || (product_option == 'b')){
-        shopping_cart.push_back("Oreos");
-        cout << "Oreos added to cart." << endl;
-        return shopping_cart;
+        if (budget >= 2.99){
+            budget = budget - 2.99;
+            shopping_cart.push_back("Oreos");
+            cout << "Oreos added to cart." << endl;
+            return;
+        }
+        else{
+            cout << "Insufficient funds!" << budget << endl;
+            return;
+        }
     }
     else if ((product_option == 'C') || (product_option == 'c')){
-        shopping_cart.push_back("Coffee");
-        cout << "Coffee added to cart." << endl;
-        return shopping_cart;
+        if (budget >= 2.99){
+            budget = budget - 2.99;
+            shopping_cart.push_back("Coffee");
+            cout << "Coffee added to cart." << endl;
+            return;
+        }
+        else{
+            cout << "Insufficient funds!" << budget << endl;
+            return;
+        }
     }
     else if ((product_option == 'D') || (product_option == 'd')){
-        shopping_cart.push_back("Slurpee");
-        cout << "Slurpee added to cart." << endl;
-        return shopping_cart;
+        if (budget >= 2.99){
+            budget = budget - 2.99;
+            shopping_cart.push_back("Slurpee");
+            cout << "Slurpee added to cart." << endl;
+            return;
+        }
+        else{
+            cout << "Insufficient funds!" << budget << endl;
+            return;
+        }
     }
     else{
         cout << "Invalid input." << endl;
-        return shopping_cart;
+        return;
     }
 }
 
