@@ -10,7 +10,7 @@ void checkout(vector<string> shopping_cart);
 
 int main()
 {
-    int menu_option = 0;
+    
 
     vector<string> shopping_cart;
     cout << "Welcome to Kroga Gas Station!" << endl;
@@ -19,14 +19,24 @@ int main()
     double budget = 0;
 
     cin >> budget;
+    if(budget <= 0){
+        cout << "Insufficient funds!" << endl;
+        return -1;
+    }
 
+
+
+    int menu_option = 0;
+        
+    
+    
     while((menu_option > -1) && (menu_option < 4)){
         cout << "Please input 1-4 followed by enter to navigate the menu:" << endl;
         cout << "1) Add Product" << endl;
         cout << "2) Remove Product" << endl;
         cout << "3) Checkout" << endl;
         cout << "4) Exit" << endl;
-        
+
         cin >> menu_option;
 
         if (menu_option == 1){
@@ -41,6 +51,7 @@ int main()
             cin >> product_option;
 
             addProduct(budget, product_option, shopping_cart);
+            
         }
         else if (menu_option == 2){
             string remove_product;
@@ -51,6 +62,9 @@ int main()
         else if(menu_option == 3){
             checkout(shopping_cart);
             return 1;
+        }
+        else if(menu_option == 0){
+            cout << "Not a valid menu option" << endl;
         }
     }
 }
