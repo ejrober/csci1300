@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <map>
 using namespace std;
 
 
@@ -9,6 +10,8 @@ using namespace std;
 void calculateDistanceMatrix(double distance[][3], double clue[][2], double region[][2], const int CLUE_ROWS, const int CLUE_COLS, const int REG_ROWS, const int REG_COLS);
 
 void findClueRegion(double distance[][3], int clue_regions[], const int DISTANCE_ROWS, const int DISTANCE_COLS);
+
+void findTreasure(int clue_regions[], double region[][2], const int CLUE_REGIONS_SIZE, const int REG_ROWS, const int REG_COLS);
 
 
 
@@ -20,7 +23,7 @@ const int CLUE_COLS = 2;
 const int REG_ROWS = 3;
 const int REG_COLS = 2;
 double clue[CLUE_ROWS][CLUE_COLS] = {{2, 10}, {2, 5}, {8, 4}, {5, 8}, {1, 2}};
-double region[REG_ROWS][REG_COLS] = {{2, 10}, {5, 8}, {1, 2}};
+double region[REG_ROWS][REG_COLS] = {{0, 0}, {5, -1}, {-1, -2}};
     //End varilables for testing.
 
     double distance[CLUE_ROWS][REG_ROWS];
@@ -37,6 +40,10 @@ double region[REG_ROWS][REG_COLS] = {{2, 10}, {5, 8}, {1, 2}};
 
 
     findClueRegion(distance, clue_regions, DISTANCE_ROWS, DISTANCE_COLS);
+
+    const int CLUE_REGIONS_SIZE = sizeof(clue_regions) / sizeof(clue_regions[0]);
+
+    findTreasure(clue_regions, region, CLUE_REGIONS_SIZE, REG_ROWS, REG_COLS);
 }
 
 void calculateDistanceMatrix(double distance[][3], double clue[][2], double region[][2], const int CLUE_ROWS, const int CLUE_COLS, const int REG_ROWS, const int REG_COLS){
@@ -51,8 +58,7 @@ void calculateDistanceMatrix(double distance[][3], double clue[][2], double regi
     }
 }
 
-
-//TODO
+// TODO Issue finding that region 3 is the region with smallest distance
 void findClueRegion(double distance[][3], int clue_regions[], const int DISTANCE_ROWS, const int DISTANCE_COLS){
     double minimum = distance[0][0]; 
     int smallest_distance_region = 1;
@@ -65,8 +71,39 @@ void findClueRegion(double distance[][3], int clue_regions[], const int DISTANCE
         }
         clue_regions[clue] = smallest_distance_region;
         //Prints out to test.
-        cout << fixed << setprecision(2)<< minimum << " Region " << smallest_distance_region << endl;
+        //cout << fixed << setprecision(2)<< minimum << " Region " << smallest_distance_region << endl;
         //cout << fixed << setprecision(2)<< distance[clue][0] << endl;
-        minimum = 10000;
+        minimum = 10000; /* reset minimum for next iteration. Having problem when using distance[0][clue]
+         but should be first element and default minimum starting each pass. */
     }
+    cout << "Clue region: " << smallest_distance_region << endl;
+}
+
+/*Output**:
+     Print the region number with least number of clues and its corresponding XY coordinates.*/
+void findTreasure(int clue_regions[], double region[][2], const int CLUE_REGIONS_SIZE, const int REG_ROWS, const int REG_COLS){
+    //cout << "Print the region number with least number of clues and its corresponding XY coordinates." << endl;
+    cout << "CLUE_REGIONS_SIZE: " << CLUE_REGIONS_SIZE << endl;
+
+    map<int, int> frequency;
+    
+    for (int clue_region_number = 0; clue_region_number < CLUE_REGIONS_SIZE; clue_region_number++){
+        //cout << clue_regions[clue_region_number] << endl;
+        frequency[clue_regions[clue_region_number]]++;
+    }
+
+    int min_frequency = INT_MAX;
+    int least_frequent_element;
+
+    for(auto it: frequency){ // A for loop iterating the items of frequency referenced by it.
+        if(it.second < min_frequency){
+            min_frequency = it.second;
+            least_frequent_element = it.first;
+        }
+    }
+
+    cout << "Region " << least_frequent_element << " had the least number of clues: " << min_frequency << endl;
+
+    cout << "The treasure must be buried in the coordinates: " << region[least_frequent_element-1][0] << ", " << region[least_frequent_element-1][1] << endl;
+
 }
