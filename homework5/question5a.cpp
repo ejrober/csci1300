@@ -41,9 +41,9 @@ double region[REG_ROWS][REG_COLS] = {{0, 0}, {5, -1}, {-1, -2}};
 
     findClueRegion(distance, clue_regions, DISTANCE_ROWS, DISTANCE_COLS);
 
-    const int CLUE_REGIONS_SIZE = sizeof(clue_regions) / sizeof(clue_regions[0]);
+    //const int CLUE_REGIONS_SIZE = sizeof(clue_regions) / sizeof(clue_regions[0]);
 
-    findTreasure(clue_regions, region, CLUE_REGIONS_SIZE, REG_ROWS, REG_COLS);
+    //findTreasure(clue_regions, region, CLUE_REGIONS_SIZE, REG_ROWS, REG_COLS);
 }
 
 void calculateDistanceMatrix(double distance[][3], double clue[][2], double region[][2], const int CLUE_ROWS, const int CLUE_COLS, const int REG_ROWS, const int REG_COLS){
@@ -58,7 +58,7 @@ void calculateDistanceMatrix(double distance[][3], double clue[][2], double regi
     }
 }
 
-// TODO Issue finding that region 3 is the region with smallest distance
+/*The function should find and store the region with the smallest distance in the clue_regions array.*/
 void findClueRegion(double distance[][3], int clue_regions[], const int DISTANCE_ROWS, const int DISTANCE_COLS){
     double minimum = distance[0][0]; 
     int smallest_distance_region = 1;
@@ -71,12 +71,12 @@ void findClueRegion(double distance[][3], int clue_regions[], const int DISTANCE
         }
         clue_regions[clue] = smallest_distance_region;
         //Prints out to test.
-        //cout << fixed << setprecision(2)<< minimum << " Region " << smallest_distance_region << endl;
+        //cout << "Minimum distance: " << fixed << setprecision(2)<< minimum << " Region " << smallest_distance_region << endl;
         //cout << fixed << setprecision(2)<< distance[clue][0] << endl;
         minimum = 10000; /* reset minimum for next iteration. Having problem when using distance[0][clue]
          but should be first element and default minimum starting each pass. */
     }
-    cout << "Clue region: " << smallest_distance_region << endl;
+    //cout << "Clue region: " << smallest_distance_region << endl;
 }
 
 /*Output**:
