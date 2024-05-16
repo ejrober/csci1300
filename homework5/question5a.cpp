@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iomanip>
 #include <map>
+#include <unordered_map>
 using namespace std;
 
 
@@ -18,7 +19,7 @@ void findTreasure(int clue_regions[], double region[][2], const int CLUE_REGIONS
 int main()
 {
 //These variabes are for testing.
-   const int CLUE_ROWS = 5;
+const int CLUE_ROWS = 5;
 const int CLUE_COLS = 2;
 const int REG_ROWS = 3;
 const int REG_COLS = 2;
@@ -41,9 +42,9 @@ double region[REG_ROWS][REG_COLS] = {{0, 0}, {5, -1}, {-1, -2}};
 
     findClueRegion(distance, clue_regions, DISTANCE_ROWS, DISTANCE_COLS);
 
-    //const int CLUE_REGIONS_SIZE = sizeof(clue_regions) / sizeof(clue_regions[0]);
+    const int CLUE_REGIONS_SIZE = sizeof(clue_regions) / sizeof(clue_regions[0]);
 
-    //findTreasure(clue_regions, region, CLUE_REGIONS_SIZE, REG_ROWS, REG_COLS);
+    findTreasure(clue_regions, region, CLUE_REGIONS_SIZE, REG_ROWS, REG_COLS);
 }
 
 void calculateDistanceMatrix(double distance[][3], double clue[][2], double region[][2], const int CLUE_ROWS, const int CLUE_COLS, const int REG_ROWS, const int REG_COLS){
@@ -79,31 +80,51 @@ void findClueRegion(double distance[][3], int clue_regions[], const int DISTANCE
     //cout << "Clue region: " << smallest_distance_region << endl;
 }
 
-/*Output**:
+/*   findClueRegion should be run first to populate the clue_regions array.
+Output**:
      Print the region number with least number of clues and its corresponding XY coordinates.*/
+     //What if the region has no clues?
 void findTreasure(int clue_regions[], double region[][2], const int CLUE_REGIONS_SIZE, const int REG_ROWS, const int REG_COLS){
-    //cout << "Print the region number with least number of clues and its corresponding XY coordinates." << endl;
-    cout << "CLUE_REGIONS_SIZE: " << CLUE_REGIONS_SIZE << endl;
 
-    map<int, int> frequency;
-    
-    for (int clue_region_number = 0; clue_region_number < CLUE_REGIONS_SIZE; clue_region_number++){
-        //cout << clue_regions[clue_region_number] << endl;
-        frequency[clue_regions[clue_region_number]]++;
+    //unordered_map<int, int> frequency;
+
+    //countFrequency(clue_regions, CLUE_REGIONS_SIZE);
+
+    /*for (int clue_region = 0; clue_region < CLUE_REGIONS_SIZE; clue_region++){
+        cout << "Clue region: " << clue_regions[clue_region] << endl;
+        //frequency[clue_regions[clue_region]]++;
     }
 
-    int min_frequency = INT_MAX;
-    int least_frequent_element;
+    for (int region_row = 0; region_row <REG_ROWS; region_row ++){
+        cout << "Region coordinates: " << region[region_row][0] << ", " << region[region_row][1] << endl;
+    }*/
 
-    for(auto it: frequency){ // A for loop iterating the items of frequency referenced by it.
-        if(it.second < min_frequency){
-            min_frequency = it.second;
-            least_frequent_element = it.first;
+    unordered_map<int, int> frequencies;
+
+    for (int i = 0; i < REG_ROWS; i ++){
+        for (int j = 0; j < CLUE_REGIONS_SIZE; j ++){
+            if((i + 1) == clue_regions[j]){
+                frequencies[i]++;
+            }
+        }
+        //cout << "Frequency of region " << (i + 1) << " is " << frequencies[i] << endl;
+    }
+
+    int minimum_frequency = 10;
+    int minimum_frequency_index = 0;
+
+    for (int i = 0; i < REG_ROWS; i++){
+        if (frequencies[i] < minimum_frequency){
+            minimum_frequency = frequencies[i];
+            minimum_frequency_index = i;
         }
     }
 
-    cout << "Region " << least_frequent_element << " had the least number of clues: " << min_frequency << endl;
+    //cout << "The minimum frequency index is " << minimum_frequency_index << " . And The minimum frequency is " << minimum_frequency << endl;
 
-    cout << "The treasure must be buried in the coordinates: " << region[least_frequent_element-1][0] << ", " << region[least_frequent_element-1][1] << endl;
+    int least_frequent_region = (minimum_frequency_index + 1);
+    cout << "Region " << least_frequent_region << " had the least number of clues : " << minimum_frequency << endl;
+
+    cout << "The treasure must be buried at (" << region[minimum_frequency_index][0] << ", " << region[minimum_frequency_index][1] << ")" << endl; 
 
 }
